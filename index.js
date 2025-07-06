@@ -29,7 +29,7 @@ const db = new Pool({
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: "https://task-pilot-liard.vercel.app",
     credentials: true
 }));
 
