@@ -88,7 +88,7 @@ app.post("/register", async (req,Res)=>{
                     [email,result,username,position, organisation],
                     (err,res)=>{
                         if(err) Res.status(500).json({success:false});
-                        else Res.redirect("http://localhost:5173/login");
+                        else Res.redirect("https://task-pilot-liard.vercel.app/login");
                     });
                 }
             })
