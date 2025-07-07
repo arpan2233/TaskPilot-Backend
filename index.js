@@ -83,19 +83,28 @@ app.post("/register", async (req,Res)=>{
             console.log("reached");
             
             bcrypt.hash(password, saltRounds, async (err,result)=>{
-                if(err) Res.status(500).json({success:false});
+                if(err) {
+                    console.log(err);
+                    
+                    Res.status(500).json({success:false});
+                }
                 else{
                     db.query(
                     `INSERT INTO user_info(email,user_password,user_name,user_position,org_name) VALUES($1,$2,$3,$4,$5);`,
                     [email,result,username,position, organisation],
                     (err,res)=>{
-                        if(err) Res.status(500).json({success:false});
+                        if(err) {
+                            console.log(err);
+                            Res.status(500).json({success:false});
+                        }
                         else Res.redirect("https://task-pilot-liard.vercel.app/login");
                     });
                 }
             })
         }
     } catch (error) {
+        console.log(error);
+        
         Res.status(500).send({success:false});
     }
 })
