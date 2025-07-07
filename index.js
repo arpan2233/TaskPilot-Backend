@@ -29,7 +29,7 @@ const db = new Pool({
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: "https://task-pilot-liard.vercel.app",
     credentials: true
 }));
 
@@ -70,6 +70,8 @@ app.post("/register", async (req,Res)=>{
     const email = req.body.email;
     const password = req.body.password;
     const organisation = req.body.organisation;
+    console.log(req);
+    
     try {
         console.log("reached");
         const checkEmailExistence = await db.query(`SELECT email FROM user_info WHERE email=$1 AND org_name=$2`, [email, organisation]);
@@ -88,7 +90,7 @@ app.post("/register", async (req,Res)=>{
                     [email,result,username,position, organisation],
                     (err,res)=>{
                         if(err) Res.status(500).json({success:false});
-                        else Res.redirect("http://localhost:5173/login");
+                        else Res.redirect("https://task-pilot-liard.vercel.app/login");
                     });
                 }
             })
