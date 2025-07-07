@@ -75,7 +75,7 @@ app.post("/register", async (req,Res)=>{
     try {
         console.log("reached");
         const checkEmailExistence = await db.query(`SELECT email FROM user_info WHERE email=$1 AND org_name=$2`, [email, organisation]);
-        console.log(checkEmailExistence);
+        console.log(checkEmailExistence.rows);
         
         if(checkEmailExistence.rows.length > 0) {
             Res.send('Email already exist');
