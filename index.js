@@ -57,7 +57,15 @@ app.post("/login", (req,Res)=>{
                 Res.send(res.rows);
             }
             bcrypt.compare(password, res.rows[0].user_password , (error,result) => {
-                if(result) Res.send(res.rows);
+                if(result) {
+                    var ans = [{}];
+                    ans[0].uid = res.rows[0].uid;
+                    ans[0].email = res.rows[0].email;
+                    ans[0].user_name = res.rows[0].user_name;
+                    ans[0].user_position = res.rows[0].user_position;
+                    ans[0].org_name = res.rows[0].org_name;
+                    Res.send(ans);
+                }
                 else Res.status(401).json({success:false});
             })
         }
