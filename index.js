@@ -58,7 +58,7 @@ app.post("/login", (req,Res)=>{
             }
             bcrypt.compare(password, res.rows[0].user_password , (error,result) => {
                 if(result) {
-                    Res.send(res.rows[0]);
+                    Res.send(res.rows);
                 }
                 else Res.status(401).json({success:false});
             })
