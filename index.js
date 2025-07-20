@@ -58,9 +58,7 @@ app.post("/login", (req,Res)=>{
             }
             bcrypt.compare(password, res.rows[0].user_password , (error,result) => {
                 if(result) {
-                    const ans = res.rows[0];
-                    delete ans.user_password;
-                    Res.send(ans);
+                    Res.send(res.rows[0]);
                 }
                 else Res.status(401).json({success:false});
             })
